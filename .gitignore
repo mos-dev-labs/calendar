@@ -37,4 +37,8 @@ yarn-error.log*
 .DS_Store
 *.pem
 
+# intellij
 .idea/*
+
+# storybook
+storybook-static
