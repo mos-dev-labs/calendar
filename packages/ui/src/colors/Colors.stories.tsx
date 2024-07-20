@@ -5,7 +5,7 @@ const Item = ({title, colors}) => {
   return (
     <section style={{marginBottom: '30px'}}>
       <h3 style={{fontSize: '24px', marginBottom: '10px'}}>{title}</h3>
-      <section style={{width: '100%', background: 'lightcyan', boxSizing: 'border-box'}}>
+      <section style={{width: '100%', boxSizing: 'border-box'}}>
         {Object.keys(colors).map(key => {
           // @ts-ignore
           const color: { name: string, color: string } = colors[key]
@@ -20,7 +20,8 @@ const Item = ({title, colors}) => {
               alignItems: 'center',
               color: 'black',
               justifyContent: "center",
-              margin: '10px'
+              margin: '10px',
+              border: '1px solid gray'
             }}>
               <b>{color.name}</b><br/>
               <p>{color.color}</p>
