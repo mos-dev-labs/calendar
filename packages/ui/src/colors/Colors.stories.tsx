@@ -1,4 +1,4 @@
-import {BorderColors, Colors, allColorStyles, DividerColors, IconColors, TextColors} from "./Colors";
+import {BorderColors, allColorStyles, DividerColors, IconColors, TextColors, colorSet} from "./Colors";
 
 // @ts-ignore
 const Item = ({title, colors}) => {
@@ -10,19 +10,22 @@ const Item = ({title, colors}) => {
           // @ts-ignore
           const color: { name: string, color: string } = colors[key]
           return (
-            <div style={{
-              display: "inline-flex",
-              flexDirection: 'column',
-              width: '200px',
-              height: '200px',
-              borderRadius: '50%',
-              background: `var(${color.name})`,
-              alignItems: 'center',
-              color: 'black',
-              justifyContent: "center",
-              margin: '10px',
-              border: '1px solid gray'
-            }}>
+            <div
+              style={{
+                display: "inline-flex",
+                flexDirection: 'column',
+                width: '200px',
+                height: '200px',
+                borderRadius: '50%',
+                background: `var(${color.name})`,
+                alignItems: 'center',
+                color: 'black',
+                justifyContent: "center",
+                margin: '10px',
+                border: '1px solid gray'
+              }}
+              key={color.name}
+            >
               <b>{color.name}</b><br/>
               <p>{color.color}</p>
             </div>
@@ -33,14 +36,18 @@ const Item = ({title, colors}) => {
   )
 }
 
-const Color = () => {
+// @ts-ignore
+const Color = ({items}) => {
   return (
     <article style={{...allColorStyles, width: '100%', overflow: 'auto'}}>
-      <Item title="Palette" colors={Colors}/>
-      <Item title="Text" colors={TextColors}/>
-      <Item title="Border" colors={BorderColors}/>
-      <Item title="Divider" colors={DividerColors}/>
-      <Item title="Icon" colors={IconColors}/>
+      {
+        // @ts-ignore
+        items.map(item => {
+          return (
+            <Item title={item.title} colors={item.colors} key={item.title}/>
+          )
+        })
+      }
     </article>
   )
 }
@@ -48,10 +55,53 @@ const Color = () => {
 export default {
   title: 'Colors',
   component: Color,
-  tags: ['']
+  tags: ['autodocs'],
+  argTypes: {
+    label: {control: 'text'}
+  }
 } as any
 
-export const Palette = {
-  args: {}
+const colorSetTitles = ['Palette', 'Text', 'Border', 'Divider', 'Icon']
+
+export const All = {
+  args: {
+    items: Array.from({length: colorSet.length}).map((_, index) => (
+      {
+        title: colorSetTitles[index],
+        colors: colorSet[index]
+      }
+    ))
+  }
 }
 
+export const Text = {
+  args: {
+    items: [
+      {title: 'Text', colors: TextColors},
+    ]
+  }
+}
+
+export const Border = {
+  args: {
+    items: [
+      {title: 'Border', colors: BorderColors},
+    ]
+  }
+}
+
+export const Divider = {
+  args: {
+    items: [
+      {title: 'Divicer', colors: DividerColors},
+    ]
+  }
+}
+
+export const Icon = {
+  args: {
+    items: [
+      {title: 'Icon', colors: IconColors},
+    ]
+  }
+}
