@@ -188,7 +188,7 @@ export const makeStyles = (colors: ColorsType) => {
   }, {})
 }
 
-export const colorSet = [Colors, DividerColors, BorderColors, IconColors, TextColors]
+export const colorSet = [Colors, TextColors, BorderColors, DividerColors, IconColors,]
 
 export const allColorStyles = colorSet.reduce((acc, cur) => {
   const style = makeStyles(cur)
